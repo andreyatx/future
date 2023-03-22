@@ -1,0 +1,16 @@
+@media (min-width: 539px) {
+  .label {
+    justify-self: center;
+  }
+  .label select {
+    margin-left: 16px;
+  }
+}
+
+@media (max-width: 540px) {
+  .label {
+    min-width: 240px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
