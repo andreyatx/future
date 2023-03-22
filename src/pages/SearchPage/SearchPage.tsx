@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
+import { api } from "../../api";
 import { Select } from "../../components/Select";
 import styles from "./SearchPage.module.css";
 
@@ -20,6 +21,9 @@ const CATEGORIES_OPTIONS = [
 const SORTING_OPTIONS = ["relevance", "newest"];
 
 export const SearchPage: FC = () => {
+  api.get(
+    `/books/v1/volumes?q=flowers+inauthor:keyes&key=${process.env.REACT_APP_API_KEY}`
+  );
   return (
     <div className={styles.searchContainer}>
       <h1>{HEADING}</h1>
