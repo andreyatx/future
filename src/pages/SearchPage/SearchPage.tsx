@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from "react";
+import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { api } from "../../api";
 import { Select } from "../../components/Select";
@@ -6,8 +6,20 @@ import styles from "./SearchPage.module.css";
 import SearchIcon from "../../assets/SearchIcon.svg";
 import { OPTIONS, SEARCH } from "./constants";
 
+type SearchQuery = {
+  searchText: string;
+  category: string;
+  sort: string;
+};
+
+const initialQuery: SearchQuery = {
+  searchText: "",
+  category: "",
+  sort: "",
+};
+
 export const SearchPage: FC = () => {
-  const [query, setQuery] = useState();
+  const [query, setQuery] = useState<SearchQuery>(initialQuery);
 
   api.get(
     `/books/v1/volumes?q=flowers+inauthor:keyes&key=${process.env.REACT_APP_API_KEY}`
@@ -16,10 +28,20 @@ export const SearchPage: FC = () => {
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log("submitted");
+    console.log("submitted", query);
+    setQuery(initialQuery);
   };
 
-  const handleInputChange = () => {};
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = event.target;
+
+    setQuery({
+      ...query,
+      [name]: value,
+    });
+  };
 
   return (
     <div className={styles.searchContainer}>
@@ -31,6 +53,10 @@ export const SearchPage: FC = () => {
             placeholder="Поиск..."
             autoFocus
             className={styles.searchBar}
+            onChange={handleInputChange}
+            defaultValue={query.searchText}
+            name="searchText"
+            required
           />
           <button type="submit" className={styles.btnSearch}>
             <img src={SearchIcon} alt="search" className={styles.searchIcon} />
@@ -38,8 +64,21 @@ export const SearchPage: FC = () => {
           </button>
         </div>
         <div className={styles.selectContainer}>
-          <Select name={SEARCH.CATEGORIES} options={OPTIONS.CATEGORIES} />
-          <Select name={SEARCH.SORTING} options={OPTIONS.SORTING} />
+          <Select
+            title={SEARCH.CATEGORIES}
+            options={OPTIONS.CATEGORIES}
+            onChange={handleInputChange}
+            name="category"
+            value={query.category}
+          />
+
+          <Select
+            onChange={handleInputChange}
+            title={SEARCH.SORTING}
+            options={OPTIONS.SORTING}
+            name="sort"
+            value={query.sort}
+          />
         </div>
       </form>
 
