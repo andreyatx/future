@@ -13,9 +13,11 @@ const getBooks = createAsyncThunk("books/get", async (data: SearchQuery) => {
   const orderBy = data.sort;
   const subject = data.category;
 
-  api.get(
-    `/books/v1/volumes?q=${searchText}&orderBy=${orderBy}&key=${process.env.REACT_APP_API_KEY}&subject=${subject}&maxResults=${maxResults}`
-  );
+  const searchQuery = `/books/v1/volumes?q=${searchText}&orderBy=${orderBy}&key=${process.env.REACT_APP_API_KEY}&subject=${subject}&maxResults=${maxResults}`;
+
+  const response = await api.get(searchQuery);
+
+  return response.data;
 });
 
 export const booksThunks = { getBooks };

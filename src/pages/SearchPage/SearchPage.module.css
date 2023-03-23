@@ -5,4 +5,13 @@
   align-items: center;
   background-color: #c8c8c8;
   min-height: 20vh;
+  margin-bottom: 20px;
+}
+.heading {
+  padding: 20px;
+  border-radius: 16px;
+}
+.heading:hover {
+  cursor: pointer;
+  background-color: #acacac;
 }

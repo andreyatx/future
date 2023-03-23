@@ -1,0 +1,32 @@
+.book {
+  background-color: #cccccc;
+  width: 20vw;
+  min-width: 200px;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.book > * + * {
+  margin-bottom: 8px;
+}
+
+.thumbnail {
+  align-self: center;
+  min-width: fit-content;
+  width: 12vw;
+  margin-bottom: 8px;
+}
+
+.category {
+  color: #fdfdfd;
+  text-decoration: underline;
+}
+
+.title {
+  font-weight: bold;
+}
