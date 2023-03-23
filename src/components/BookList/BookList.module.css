@@ -7,8 +7,26 @@
 .noBooksFound {
   text-align: center;
 }
+
 .booksFound {
   text-align: center;
   font-weight: bold;
   margin-bottom: 6px;
+}
+
+.loadMore {
+  display: flex;
+  justify-content: center;
+}
+
+.btnLoadMore {
+  padding: 10px;
+  font-weight: bold;
+  font-size: large;
+  border-radius: 12px;
+}
+
+.btnLoadMore:hover {
+  background-color: #ccc;
+  cursor: pointer;
 }

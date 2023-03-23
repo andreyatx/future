@@ -9,15 +9,23 @@ import { SearchForm } from "./SearchForm/SearchForm";
 import styles from "./SearchPage.module.css";
 
 export const SearchPage: FC = () => {
-  const { isLoading } = useAppSelector(booksSelectors.all);
+  const { isLoading, totalBooks } = useAppSelector(booksSelectors.all);
   return (
     <>
       <div className={styles.searchContainer}>
-        <h1 className={styles.heading}>{SEARCH.HEADING}</h1>
+        <h1
+          onClick={() => {
+            window.location.reload();
+          }}
+          className={styles.heading}
+        >
+          {SEARCH.HEADING}
+        </h1>
+
         <SearchForm />
       </div>
       <Outlet />
-      {isLoading ? <Loader /> : <BookList />}
+      {isLoading && !totalBooks ? <Loader /> : <BookList />}
     </>
   );
 };

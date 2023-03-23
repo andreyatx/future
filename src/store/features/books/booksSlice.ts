@@ -1,14 +1,30 @@
-import { booksThunks } from "./booksThunks";
+import { booksThunks, SearchQuery } from "./booksThunks";
 import { RootState } from "./../../store";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { OPTIONS } from "../../../pages/SearchPage/SearchForm/constants";
+import { BookProps } from "../../../components/BookList/Book/Book";
+
+type BookRequest = {
+  items: BookProps[];
+  totalItems: number;
+};
 
 type booksState = {
+  currentQuery: SearchQuery;
   isLoading: boolean;
   totalBooks: number | null;
-  bookList: [];
+  bookList: BookProps[];
+};
+
+const initialQuery: SearchQuery = {
+  searchText: "",
+  category: OPTIONS.CATEGORIES[0],
+  sort: OPTIONS.SORTING[0],
+  startIndex: 0,
 };
 
 const initialState = {
+  currentQuery: initialQuery,
   isLoading: false,
   totalBooks: null,
   bookList: [],
@@ -18,21 +34,26 @@ export const booksSlice = createSlice({
   name: "books",
   initialState,
   reducers: {
-    test: (state) => {
-      console.log(state.isLoading);
+    nextPage: (state) => {
+      state.currentQuery.startIndex += 30;
+    },
+    setCurrentQuery: (state, { payload }) => {
+      state.currentQuery = payload;
     },
   },
   extraReducers(builder) {
-    builder.addCase(booksThunks.getBooks.pending, (state, { payload }) => {
+    builder.addCase(booksThunks.getBooks.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(booksThunks.getBooks.fulfilled, (state, { payload }) => {
-      state.bookList = payload.items;
-      state.totalBooks = payload.totalItems;
-      console.log("payload", payload);
+    builder.addCase(
+      booksThunks.getBooks.fulfilled,
+      (state, { payload }: PayloadAction<BookRequest>) => {
+        state.bookList.push(...(payload.items as BookProps[]));
+        state.totalBooks = payload.totalItems;
 
-      state.isLoading = false;
-    });
+        state.isLoading = false;
+      }
+    );
   },
 });
 
