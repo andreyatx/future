@@ -1,15 +1,13 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { api } from "../../../api";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Select } from "../../../components/Select/Select";
 import { SEARCH, OPTIONS } from "./constants";
 import SearchIcon from "../../../assets/SearchIcon.svg";
 import styles from "./SearchForm.module.css";
-
-type SearchQuery = {
-  searchText: string;
-  category: string;
-  sort: string;
-};
+import {
+  booksThunks,
+  SearchQuery,
+} from "../../../store/features/books/booksThunks";
+import { useAppDispatch } from "../../../store/hooks";
 
 const initialQuery: SearchQuery = {
   searchText: "",
@@ -19,12 +17,11 @@ const initialQuery: SearchQuery = {
 
 export const SearchForm = () => {
   const [query, setQuery] = useState<SearchQuery>(initialQuery);
-  api.get(
-    `/books/v1/volumes?q=flowers+inauthor:keyes&key=${process.env.REACT_APP_API_KEY}`
-  );
+  const dispatch = useAppDispatch();
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    dispatch(booksThunks.getBooks(query));
     console.log("submitted", query);
   };
 

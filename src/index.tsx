@@ -4,6 +4,8 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { SearchPage } from "./pages/SearchPage/SearchPage";
 import { BookPage } from "./pages/BookPage/BookPage";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 export enum Paths {
   Home = "/",
@@ -26,4 +28,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-root.render(<RouterProvider router={router} />);
+root.render(
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+);
