@@ -13,8 +13,8 @@ type SearchQuery = {
 
 const initialQuery: SearchQuery = {
   searchText: "",
-  category: "",
-  sort: "",
+  category: OPTIONS.CATEGORIES[0],
+  sort: OPTIONS.SORTING[0],
 };
 
 export const SearchForm = () => {
@@ -26,7 +26,6 @@ export const SearchForm = () => {
     event.preventDefault();
 
     console.log("submitted", query);
-    setQuery(initialQuery);
   };
 
   const handleInputChange = (
