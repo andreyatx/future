@@ -1,88 +1,19 @@
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { FC } from "react";
 import { Outlet } from "react-router-dom";
-import { api } from "../../api";
-import { Select } from "../../components/Select";
+import { BookList } from "../../components/BookList/BookList";
+import { SEARCH } from "./SearchForm/constants";
+import { SearchForm } from "./SearchForm/SearchForm";
 import styles from "./SearchPage.module.css";
-import SearchIcon from "../../assets/SearchIcon.svg";
-import { OPTIONS, SEARCH } from "./constants";
-
-type SearchQuery = {
-  searchText: string;
-  category: string;
-  sort: string;
-};
-
-const initialQuery: SearchQuery = {
-  searchText: "",
-  category: "",
-  sort: "",
-};
 
 export const SearchPage: FC = () => {
-  const [query, setQuery] = useState<SearchQuery>(initialQuery);
-
-  api.get(
-    `/books/v1/volumes?q=flowers+inauthor:keyes&key=${process.env.REACT_APP_API_KEY}`
-  );
-
-  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    console.log("submitted", query);
-    setQuery(initialQuery);
-  };
-
-  const handleInputChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = event.target;
-
-    setQuery({
-      ...query,
-      [name]: value,
-    });
-  };
-
   return (
-    <div className={styles.searchContainer}>
-      <h1>{SEARCH.HEADING}</h1>
-      <form onSubmit={submitHandler}>
-        <div className={styles.searchField}>
-          <input
-            type="search"
-            placeholder="Поиск..."
-            autoFocus
-            className={styles.searchBar}
-            onChange={handleInputChange}
-            defaultValue={query.searchText}
-            name="searchText"
-            required
-          />
-          <button type="submit" className={styles.btnSearch}>
-            <img src={SearchIcon} alt="search" className={styles.searchIcon} />
-            {SEARCH.FIND}
-          </button>
-        </div>
-        <div className={styles.selectContainer}>
-          <Select
-            title={SEARCH.CATEGORIES}
-            options={OPTIONS.CATEGORIES}
-            onChange={handleInputChange}
-            name="category"
-            value={query.category}
-          />
-
-          <Select
-            onChange={handleInputChange}
-            title={SEARCH.SORTING}
-            options={OPTIONS.SORTING}
-            name="sort"
-            value={query.sort}
-          />
-        </div>
-      </form>
-
+    <>
+      <div className={styles.searchContainer}>
+        <h1>{SEARCH.HEADING}</h1>
+        <SearchForm />
+      </div>
       <Outlet />
-    </div>
+      <BookList />
+    </>
   );
 };
