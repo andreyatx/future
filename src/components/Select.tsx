@@ -12,7 +12,11 @@ export const Select: FC<SelectProps> = ({ name, options }) => {
       {name}
       <select name={name}>
         {options.map((option) => {
-          return <option value={option}>{option}</option>;
+          return (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          );
         })}
       </select>
     </label>

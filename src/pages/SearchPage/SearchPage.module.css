@@ -9,12 +9,28 @@
 
 .searchBar {
   min-width: 240px;
+  height: 4vh;
   width: 40vw;
+  margin-bottom: 10px;
+  margin-right: 6px;
 }
 
 .selectContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.searchField {
+  display: flex;
+  align-items: baseline;
+}
+
+.searchIcon {
+  width: 16px;
+}
+.btnSearch {
+  align-items: center;
+  height: 4vh;
 }
 
 @media (max-width: 540px) {
