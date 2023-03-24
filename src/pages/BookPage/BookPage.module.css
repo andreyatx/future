@@ -1,5 +1,4 @@
 .container {
-  background-color: aqua;
   height: 80vh;
   display: flex;
 }
@@ -7,9 +6,45 @@
 .left {
   width: 40vw;
   background-color: #dddddd;
+  display: flex;
+  justify-content: center;
+}
+
+.thumbnail {
+  margin-top: 20px;
+  width: 20vw;
+  max-width: 200px;
+  min-width: 100px;
+  max-height: 30vh;
 }
 
 .right {
   width: 60vw;
   background-color: #f0f0f0;
+}
+
+.about {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.categories {
+  margin-bottom: 20px;
+}
+.title {
+  font-weight: bold;
+  font-size: x-large;
+  margin-bottom: 8px;
+}
+
+.authors {
+  text-decoration: underline;
+  margin-bottom: 16px;
+}
+
+.description {
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid black;
 }

@@ -8,6 +8,7 @@ type VolumeInfo = {
   imageLinks: { smallThumbnail: string; thumbnail: string };
   categories: string[];
   authors: string[];
+  description?: string;
 };
 export type BookProps = {
   id: string;
