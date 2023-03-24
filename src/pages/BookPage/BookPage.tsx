@@ -60,7 +60,6 @@ export const BookPage: FC = () => {
   useEffect(() => {
     fetchBook();
   }, [fetchBook]);
-  console.log("book", book);
 
   if (!book) {
     return <Loader />;

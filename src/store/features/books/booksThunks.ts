@@ -27,7 +27,6 @@ const getBookById = createAsyncThunk("books/bookid", async (id: string) => {
   const query = `/books/v1/volumes/${id}?key=${process.env.REACT_APP_API_KEY}`;
   const response = await api.get(query);
 
-  console.log(response);
   return response.data as BookProps;
 });
 
