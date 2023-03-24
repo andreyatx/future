@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: "https://www.googleapis.com",
 });
 
 api.interceptors.request.use((config: any) => {
