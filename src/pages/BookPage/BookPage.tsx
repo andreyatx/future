@@ -11,7 +11,6 @@ export const BookPage: FC = () => {
   const { bookid } = useParams();
   const dispatch = useAppDispatch();
   const [book, setBook] = useState<BookProps | null>(null);
-
   const imageLinks = book?.volumeInfo.imageLinks;
   const imageLinksMap = imageLinks ? (
     <img

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Paths } from "../../router";
 import styles from "./ErrorPage.module.css";
 
 export const ErrorPage = () => {
@@ -7,7 +8,7 @@ export const ErrorPage = () => {
       <div className={styles.message}>
         <h1>ОШИБКА</h1>
         <p>Произошла ошибка, или данной страницы не существует</p>
-        <Link to="..">Вернуться назад</Link>
+        <Link to={Paths.Home}>Вернуться на главную</Link>
       </div>
     </div>
   );
