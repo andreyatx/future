@@ -20,7 +20,7 @@ export const Book: FC<BookProps> = ({
   volumeInfo: { title, categories, authors, imageLinks },
 }) => {
   return (
-    <Link to={`/book/${id}`}>
+    <Link className={styles.bookWrapper} to={`/book/${id}`}>
       <div className={styles.book}>
         {imageLinks ? (
           <img

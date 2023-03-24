@@ -31,7 +31,7 @@
   font-weight: bold;
 }
 
-a {
+.bookWrapper {
   all: unset;
   cursor: pointer;
 }
