@@ -6,20 +6,26 @@ import { SearchPage } from "./pages/SearchPage/SearchPage";
 import { BookPage } from "./pages/BookPage/BookPage";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { BookList } from "./pages/BookList/BookList";
 
 export enum Paths {
   Home = "/",
-  Book = "/:bookid",
+  BookList = "/search-results",
+  Book = "/book/:bookid",
 }
 
 const router = createBrowserRouter([
   {
     element: <SearchPage />,
-    path: "/",
+    path: Paths.Home,
     children: [
       {
+        element: <BookList />,
+        path: Paths.BookList,
+      },
+      {
         element: <BookPage />,
-        path: "/book/:bookid",
+        path: Paths.Book,
       },
     ],
   },

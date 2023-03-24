@@ -1,12 +1,13 @@
 import { FC } from "react";
+import { BookProps, Book } from "../../components/Book/Book";
+import { Loader } from "../../components/Loader/Loader";
 import {
   booksActions,
   booksSelectors,
 } from "../../store/features/books/booksSlice";
 import { booksThunks } from "../../store/features/books/booksThunks";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { Loader } from "../Loader/Loader";
-import { Book, BookProps } from "./Book/Book";
+
 import styles from "./BookList.module.css";
 
 export const BookList: FC = () => {
@@ -19,6 +20,10 @@ export const BookList: FC = () => {
     dispatch(booksActions.nextPage());
     dispatch(booksThunks.getBooks(currentQuery));
   };
+
+  if (isLoading && !totalBooks) {
+    return <Loader />;
+  }
 
   if (totalBooks === 0) {
     return (

@@ -1,20 +1,18 @@
 import { FC } from "react";
-import { Outlet } from "react-router-dom";
-import { BookList } from "../../components/BookList/BookList";
-import { Loader } from "../../components/Loader/Loader";
-import { booksSelectors } from "../../store/features/books/booksSlice";
-import { useAppSelector } from "../../store/hooks";
+import { Outlet, useNavigate } from "react-router-dom";
+import { Paths } from "../..";
 import { SEARCH } from "./SearchForm/constants";
 import { SearchForm } from "./SearchForm/SearchForm";
 import styles from "./SearchPage.module.css";
 
 export const SearchPage: FC = () => {
-  const { isLoading, totalBooks } = useAppSelector(booksSelectors.all);
+  const navigate = useNavigate();
   return (
     <>
       <div className={styles.searchContainer}>
         <h1
           onClick={() => {
+            navigate(Paths.Home);
             window.location.reload();
           }}
           className={styles.heading}
@@ -25,7 +23,6 @@ export const SearchPage: FC = () => {
         <SearchForm />
       </div>
       <Outlet />
-      {isLoading && !totalBooks ? <Loader /> : <BookList />}
     </>
   );
 };

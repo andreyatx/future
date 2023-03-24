@@ -2,7 +2,7 @@ import { booksThunks, SearchQuery } from "./booksThunks";
 import { RootState } from "./../../store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { OPTIONS } from "../../../pages/SearchPage/SearchForm/constants";
-import { BookProps } from "../../../components/BookList/Book/Book";
+import { BookProps } from "../../../components/Book/Book";
 
 type BookRequest = {
   items: BookProps[];

@@ -9,14 +9,18 @@ import {
   booksActions,
   booksSelectors,
 } from "../../../store/features/books/booksSlice";
+import { useNavigate } from "react-router-dom";
+import { Paths } from "../../..";
 
 export const SearchForm = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { currentQuery } = useAppSelector(booksSelectors.all);
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    navigate(Paths.BookList);
     dispatch(booksThunks.getBooks(currentQuery));
     dispatch(booksActions.nextPage());
   };
