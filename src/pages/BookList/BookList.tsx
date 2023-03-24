@@ -11,17 +11,16 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import styles from "./BookList.module.css";
 
 export const BookList: FC = () => {
-  const { bookList, totalBooks, currentQuery, isLoading } = useAppSelector(
-    booksSelectors.all
-  );
+  const { bookList, totalBooks, currentQuery, isLoading, isLoadMore } =
+    useAppSelector(booksSelectors.all);
   const dispatch = useAppDispatch();
 
   const loadMoreHandler = () => {
     dispatch(booksActions.nextPage());
-    dispatch(booksThunks.getBooks(currentQuery));
+    dispatch(booksThunks.loadMoreBooks(currentQuery));
   };
 
-  if (isLoading && !totalBooks) {
+  if (isLoading && !isLoadMore) {
     return <Loader />;
   }
 

@@ -14,6 +14,7 @@ type booksState = {
   isLoading: boolean;
   totalBooks: number | null;
   bookList: BookProps[];
+  isLoadMore: boolean;
 };
 
 const initialQuery: SearchQuery = {
@@ -28,6 +29,7 @@ const initialState = {
   isLoading: false,
   totalBooks: null,
   bookList: [],
+  isLoadMore: false,
 } as booksState;
 
 export const booksSlice = createSlice({
@@ -48,10 +50,24 @@ export const booksSlice = createSlice({
     builder.addCase(
       booksThunks.getBooks.fulfilled,
       (state, { payload }: PayloadAction<BookRequest>) => {
+        state.bookList = payload.items as BookProps[];
+        state.totalBooks = payload.totalItems;
+
+        state.isLoading = false;
+      }
+    );
+    builder.addCase(booksThunks.loadMoreBooks.pending, (state) => {
+      state.isLoading = true;
+      state.isLoadMore = true;
+    });
+    builder.addCase(
+      booksThunks.loadMoreBooks.fulfilled,
+      (state, { payload }: PayloadAction<BookRequest>) => {
         state.bookList.push(...(payload.items as BookProps[]));
         state.totalBooks = payload.totalItems;
 
         state.isLoading = false;
+        state.isLoadMore = false;
       }
     );
   },
