@@ -1,3 +1,4 @@
+import { BookProps } from "./../../../components/Book/Book";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../../api";
 
@@ -15,8 +16,6 @@ const getBooks = createAsyncThunk("books/get", async (data: SearchQuery) => {
   const subject = data.category;
   const startIndex = data.startIndex;
 
-  console.log("in thunk", data);
-
   const searchQuery = `/books/v1/volumes?q=${searchText}&orderBy=${orderBy}&key=${process.env.REACT_APP_API_KEY}&subject=${subject}&maxResults=${maxResults}&startIndex=${startIndex}`;
 
   const response = await api.get(searchQuery);
@@ -24,4 +23,12 @@ const getBooks = createAsyncThunk("books/get", async (data: SearchQuery) => {
   return response.data;
 });
 
-export const booksThunks = { getBooks };
+const getBookById = createAsyncThunk("books/bookid", async (id: string) => {
+  const query = `/books/v1/volumes/${id}?key=${process.env.REACT_APP_API_KEY}`;
+  const response = await api.get(query);
+
+  console.log(response);
+  return response.data as BookProps;
+});
+
+export const booksThunks = { getBooks, getBookById };

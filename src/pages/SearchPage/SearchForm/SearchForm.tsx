@@ -10,7 +10,7 @@ import {
   booksSelectors,
 } from "../../../store/features/books/booksSlice";
 import { useNavigate } from "react-router-dom";
-import { Paths } from "../../..";
+import { Paths } from "../../../router";
 
 export const SearchForm = () => {
   const dispatch = useAppDispatch();

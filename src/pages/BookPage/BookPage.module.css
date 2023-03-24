@@ -1,0 +1,15 @@
+.container {
+  background-color: aqua;
+  height: 80vh;
+  display: flex;
+}
+
+.left {
+  width: 40vw;
+  background-color: #dddddd;
+}
+
+.right {
+  width: 60vw;
+  background-color: #f0f0f0;
+}

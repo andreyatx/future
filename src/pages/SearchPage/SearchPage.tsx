@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Paths } from "../..";
+import { Paths } from "../../router";
 import { SEARCH } from "./SearchForm/constants";
 import { SearchForm } from "./SearchForm/SearchForm";
 import styles from "./SearchPage.module.css";
